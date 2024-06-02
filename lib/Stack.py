@@ -1,25 +1,13 @@
-class Stack:
+ass Stack:
+def __init__(self, limit=None):
+    self.items = []
+    self.limit = limit
 
-    def __init__(self, items = [], limit = 100):
-        pass
 
-    def isEmpty(self):
-        pass
+def push(self, item):
+    if self.limit and len(self.items) >= self.limit:
+        raise ValueError("Stack is full")
+    self.items.append(item)
 
-    def push(self, item):
-        pass
-
-    def pop(self):
-        pass
-
-    def peek(self):
-        pass
-    
-    def size(self):
-        pass
-
-    def full(self):
-        pass
-
-    def search(self, target):
-        pass
+def pop(self)
+  
