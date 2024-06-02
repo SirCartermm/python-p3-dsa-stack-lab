@@ -1,72 +1,66 @@
-from Stack import Stack
+import unittest
+from lib.stack import Stack
 
-class TestStack:
-    '''Class Stack in Stack.py'''
-
+class TestStack(unittest.TestCase):
     def test_init(self):
-        '''Initialize Stack with list'''
-        stk = Stack([1,2,3,4,5])
-        expected = [1,2,3,4,5]
-        for index in range(len(expected)):
-            assert(expected[index] == stk.items[index])
+        stack = Stack()
+        self.assertEqual(stack.limit, 5)
+
+    def test_init_with_limit(self):
+        stack = Stack(5)
+        self.assertEqual(stack,limit, 5)
 
     def test_push(self):
-        '''Push 0 to stack'''
-        stk = Stack([1,2,3,4,5])
-        stk.push(0)
-        expected = [1,2,3,4,5,0]
-        for index in range(0,len(expected)):
-            assert(expected[index] == stk.items[index])
+        stack = Stack(5)
+        self.assertEqual(stack.limit, 5)
+
+    def test_push_with_limit(self):
+        stack = Stack(2)
+        stack.push(1)
+        stack.push(2)
+        with self.asserRaises(ValueError):
+            stack.push(3)
 
     def test_pop(self):
-        '''Pop 1 off the stack'''
-        stk = Stack([1,2,3,4,5])
-        stk.pop()
-        expected = [1,2,3,4]
-        for index in range(len(expected)):
-            assert(expected[index] == stk.items[index])
+        stack = Stack()
+        stack.push(1)
+        stack.push(2)
+        self.assertEqual(stack.pop(), 2)
+        self.assertEqual(stack.items, [1, 2])
+
+    def test_peek(self):
+        stack.push(1)
+        stack.push(2)
+        self.assertEqual(stack,size(), 2)
 
     def test_size(self):
-        '''Test Stack size() method'''
-        stk = Stack([1,2,3,4,5])
-        expected = [1,2,3,4,5]
-        assert(stk.size() == len(expected))
+        stack = Stack()
+        stack.push(1)
+        stack.push(2)
+        self.assertEqual(stack.size(), 2)
 
     def test_empty(self):
-        '''Test Stack empty() method'''
-        stk = Stack()
-        assert(stk.isEmpty())
-        assert(stk.size() == 0)
-        assert(stk.pop() == None)
-        stk.push(1)
-        assert(not stk.isEmpty())
-        assert(stk.size() == 1)
-        assert(stk.pop() == 1)
-
+        stack = Stack()
+        self.assertEqual(stack.size(), 2)
+        stack.push(1)
+        self.asssertTrue(stack.full())
 
     def test_full(self):
-        '''Test Stack full() method'''
-        stk = Stack([1], 1)
-
-        assert(stk.full())
-        assert(stk.size() == 1)
-        assert(stk.pop() == 1)
-        stk.push(1)
-        stk.push(2)
-        assert(stk.full())
-        assert(stk.size() == 1)
-        assert(stk.pop() == 1)
+        stack = Stack(2)
+        stack.push(1)
+        self.assertFalse(stack.full())
 
     def test_search(self):
-        '''Test Stack search() method. How far is the element in the stack? '''
-        stk = Stack([5,6,7,8,9,10])
+        stack =Stack()
+        stack.push(1)
+        stack.push(2)
+        stack.push(3)
+        self.assertEqual(stack.search(2), 1)
+        self.assertEqual(stack.search(1), 2)
+        self.assertEqual(stack.search(3), 0)
+        self.assertEqual(stack.search(4), -1)
 
-        assert(stk.search(5) == 5)
-        assert(stk.search(6) == 4)
-        assert(stk.search(7) == 3)
-        assert(stk.search(8) == 2)
-        assert(stk.search(9) == 1)
-        assert(stk.search(10) == 0)
-
-        # Case with target not in Stack
-        assert(stk.search(15) == -1)
+    if __name__ == '__main__':
+        unittest.main()
+        
+      
