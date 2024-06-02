@@ -1,9 +1,16 @@
-#!/usr/bin/env python3
+import pytest
 
-def pytest_itemcollected(item):
-    par = item.parent.obj
-    node = item.obj
-    pref = par.__doc__.strip() if par.__doc__ else par.__class__.__name__
-    suf = node.__doc__.strip() if node.__doc__ else node.__name__
-    if pref or suf:
-        item._nodeid = ' '.join((pref, suf))
+@pytest.fixture
+def empty_stack():
+    return Stack()
+
+@pytest.fixture
+def stack_with_element():
+    stack = Stack()
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    return stack
+@pytest.fixture
+def stack_with_limit():
+    return Stack(5)
